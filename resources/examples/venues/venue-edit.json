@@ -1,0 +1,9 @@
+{
+  "city": "A City 2",
+  "country_id": "15",
+  "name": "A Venue 1",
+  "profile": {
+    "lng": 12.3,
+    "capacity": 5
+  }
+}

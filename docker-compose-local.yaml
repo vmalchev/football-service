@@ -1,0 +1,73 @@
+---
+version: '3.5'
+services:
+  postgres-db:
+    image: postgres:9.6
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    restart: unless-stopped
+    environment:
+      - POSTGRES_PASSWORD=r00tme
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    ports:
+      - "80:80"
+    volumes:
+      - .:/var/www/html
+    environment:
+      - PHP_CONTAINER_NAME=php
+      - IMAGE_API_HOST=https://image.api.sportal365.com/process/smp-images-integration/assets
+
+    restart: unless-stopped
+
+  php:
+    build: 
+      context: .
+      dockerfile: Dockerfile-local.php
+    volumes:
+      - .:/var/www/html
+      - /etc/passwd:/etc/passwd
+      - $HOME_DIR:/home/$USER
+    user: $USER_ID
+    restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      - RUN_JOBS=true
+      - GOOGLE_CLOUD_PROJECT_ID=mythic-producer-212107
+      - GOOGLE_CLOUD_STORAGE_BUCKET=smp-football-api-standing-configuration
+      - GOOGLE_CLOUD_STORAGE_FILE_NAME=league-standing-integration.json
+      - GOOGLE_CLOUD_KEY_FILE=gcloud_credentials.json
+      - NOTIFICATION_QUEUE_HOST=rabbitmq
+      - NOTIFICATION_QUEUE_PORT=5672
+      - NOTIFICATION_QUEUE_USER=smp@sportal.bg
+      - NOTIFICATION_QUEUE_PASSWORD=ServiceAdmin@SMP8
+      - NOTIFICATION_QUEUE_NAME=event-notification
+      - NOTIFICATION_QUEUE_VHOST=/football-api-localdev
+      - NOTIFICATION_QUEUE_ENABLED=true
+      - PHP_IDE_CONFIG=serverName=football-api
+    depends_on:
+      - rabbitmq
+
+  redis:
+    image: redis
+    restart: unless-stopped
+
+  rabbitmq:
+    build:
+      context: .
+      dockerfile: Dockerfile-local.rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
+
+volumes:
+  postgres-data:
+  storage-data:
+  mysql-data:
+

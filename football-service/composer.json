@@ -1,0 +1,38 @@
+{
+	"config": {
+		"secure-http" : false
+	},
+	"repositories": [
+        	{
+			"type": "composer",
+           		"url": "http://composer.devks.msk.bg/"
+        	}
+    	],
+   	"name" : "sportal/football-service",
+	"description" : "Supports importing football related data from source implementing sportal/football-feed-common interfaces. Provides repositories for accesssing the data from a public API.",
+	"license" : "proprietary",
+	"keywords" : [
+		"football",
+		"import",
+		"service"
+	],
+	"authors" : [{
+			"name" : "Kostadin Stoilov",
+			"email" : "kostadin@allgoals.com"
+		}
+	],
+	"require" : {
+		"sportal/football-feed-common" : "dev-master",
+		"psr/log": "^1.0",
+		"predis/predis": "~1.0",
+		"ext-gd" : "*"	
+	},
+	"require-dev" : {
+		"phpunit/phpunit" : "5.4.*"
+	},
+	"autoload" : {
+		"psr-4" : {
+			"Sportal\\FootballApi\\" : "src"
+		}
+	}
+}

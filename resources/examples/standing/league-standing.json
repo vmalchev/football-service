@@ -1,0 +1,26 @@
+{
+  "entries": [
+    {
+      "rank": 1,
+      "team_id": "102",
+      "played": 1,
+      "wins": 1,
+      "draws": 2,
+      "losses": 3,
+      "points": 4,
+      "goals_for": 10,
+      "goals_against": 5
+    },
+    {
+      "rank": 1,
+      "team_id": "103",
+      "played": 1,
+      "wins": 1,
+      "draws": 2,
+      "losses": 3,
+      "points": 4,
+      "goals_for": 10,
+      "goals_against": 5
+    }
+  ]
+}

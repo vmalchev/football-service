@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: football-api-integration-svc
+  namespace: integration
+spec:
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+    name: http
+  selector:
+    app: football-api-integration
+    env: integration

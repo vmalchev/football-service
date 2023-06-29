@@ -1,0 +1,16 @@
+/vendor
+/public/swaggerdocs
+.env
+.buildpath
+.settings/
+.project
+.vagrant
+.phpunit
+swagger.json
+public/build
+bin/
+football-api.iml
+.idea/*
+auth.json
+.phpunit.result.cache
+.vscode/*

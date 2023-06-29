@@ -1,0 +1,116 @@
+[
+  {
+    "entity": "PLAYER",
+    "asset_type": "IMAGE",
+    "dimensions": {
+      "width": 277,
+      "height": 388
+    },
+    "contexts": [
+      {
+        "type": "TEAM"
+      }
+    ]
+  },
+  {
+    "entity": "PLAYER",
+    "asset_type": "THUMBNAIL",
+    "dimensions": {
+      "width": 150,
+      "height": 150
+    }
+  },
+  {
+    "entity": "TEAM",
+    "asset_type": "LOGO",
+    "dimensions": {
+      "width": 150,
+      "height": 150
+    }
+  },
+  {
+    "entity": "TEAM",
+    "asset_type": "HOME_KIT",
+    "dimensions": {
+      "width": 98,
+      "height": 128
+    }
+  },
+  {
+    "entity": "TEAM",
+    "asset_type": "AWAY_KIT",
+    "dimensions": {
+      "width": 98,
+      "height": 128
+    }
+  },
+  {
+    "entity": "TEAM",
+    "asset_type": "SQUAD_IMAGE",
+    "dimensions": {
+      "width": 658,
+      "height": 303
+    },
+    "contexts": [
+      {
+        "type": "SEASON"
+      }
+    ]
+  },
+  {
+    "entity": "COACH",
+    "asset_type": "IMAGE",
+    "dimensions": {
+      "width": 277,
+      "height": 388
+    }
+  },
+  {
+    "entity": "COACH",
+    "asset_type": "THUMBNAIL",
+    "dimensions": {
+      "width": 150,
+      "height": 150
+    }
+  },
+  {
+    "entity": "VENUE",
+    "asset_type": "IMAGE",
+    "dimensions": {
+      "width": 600,
+      "height": 450
+    }
+  },
+  {
+    "entity": "COUNTRY",
+    "asset_type": "FLAG",
+    "dimensions": {
+      "width": 128,
+      "height": 85
+    }
+  },
+  {
+    "entity": "REFEREE",
+    "asset_type": "IMAGE",
+    "dimensions": {
+      "width": 277,
+      "height": 388
+    }
+  },
+  {
+    "entity": "PRESIDENT",
+    "asset_type": "IMAGE",
+    "dimensions": {
+      "width": 277,
+      "height": 388
+    }
+  },
+  {
+    "entity": "TOURNAMENT",
+    "asset_type": "LOGO",
+    "dimensions": {
+      "width": 150,
+      "height": 150
+    }
+  }
+]

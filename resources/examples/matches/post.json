@@ -1,0 +1,42 @@
+{
+  "status_id": "1",
+  "kickoff_time": "2020-12-09T20:00:00+00:00",
+  "home_team_id": "104",
+  "away_team_id": "289",
+  "round_key": "6",
+  "stage_id": "1461",
+  "group_id": "454",
+  "venue_id": "59",
+  "referees": [
+    {
+      "referee_id": "158",
+      "role": "REFEREE"
+    }
+  ],
+  "score": {
+    "total": {
+      "home": 3,
+      "away": 0
+    },
+    "regular_time": {
+      "home": 3,
+      "away": 0
+    },
+    "half_time": {
+      "home": 2,
+      "away": 0
+    },
+    "extra_time": {
+      "home": 1,
+      "away": 0
+    },
+    "penalty_shootout": {
+      "home": 5,
+      "away": 3
+    }
+  },
+  "spectators": 0,
+  "coverage": "LIVE",
+  "finished_at": "2020-12-09T21:55:00+00:00",
+  "phase_started_at": "2020-12-09T21:06:45+00:00"
+}

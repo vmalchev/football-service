@@ -1,0 +1,192 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: football-api-sandbox-queue
+  namespace: sandbox
+  labels:
+    env: sandbox
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: football-api-sandbox-queue
+      env: sandbox
+  template:
+    metadata:
+      labels:
+        app: football-api-sandbox-queue
+        env: sandbox
+    spec:
+      volumes:
+      - name: cloudsql-instance-credentials
+        secret:
+          secretName: cloudsql-instance-credentials
+
+      containers:
+      - name: cloudsql-proxy-postgres
+        image: gcr.io/cloudsql-docker/gce-proxy:1.27.0
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "64Mi"
+          limits:
+            cpu: "200m"
+            memory: "128Mi"
+        command: ["/cloud_sql_proxy",
+                  "-instances=mythic-producer-212107:europe-west4:football-db=tcp:5432",
+                  "-credential_file=/secrets/cloudsql/credentials.json"]
+        volumeMounts:
+          - name: cloudsql-instance-credentials
+            mountPath: /secrets/cloudsql
+
+      - name: cloudsql-proxy-mysql
+        image: gcr.io/cloudsql-docker/gce-proxy:1.27.0
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "64Mi"
+          limits:
+            cpu: "200m"
+            memory: "128Mi"
+        command: ["/cloud_sql_proxy",
+                  "-instances=mythic-producer-212107:europe-west4:enetpulse-db=tcp:3306",
+                  "-credential_file=/secrets/cloudsql/credentials.json"]
+        volumeMounts:
+          - name: cloudsql-instance-credentials
+            mountPath: /secrets/cloudsql
+            readOnly: true
+
+      - name: football-api-php
+        image: eu.gcr.io/mythic-producer-212107/football-api-php:$DOCKER_TAG_NAME
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "1024Mi"
+          limits:
+            cpu: "1000m"
+            memory: "4096Mi"
+        ports:
+          - containerPort: 9000
+
+        env:
+          - name: APP_ENV
+            value: production
+          - name: APP_DEBUG
+            value: "false"
+          - name: APP_KEY
+            value: 7ec39addd4e218a9f9209a017f125d8e
+          - name: APP_TIMEZONE
+            value: UTC
+          - name: ENETPULSE_DB_CONNECTION
+            value: mysql
+          - name: ENETPULSE_DB_HOST
+            value: 127.0.0.1
+          - name: ENETPULSE_DB_DATABASE
+            value: enetpulse
+          - name: ENETPULSE_DB_USERNAME
+            value: root
+          - name: ENETPULSE_DB_PASSWORD
+            value: y1qyOxruCgDwoe13
+          - name: CACHE_DRIVER
+            value: database
+          - name: QUEUE_DRIVER
+            value: database
+          - name: QUEUE_DRIVER
+            value: database
+          - name: API_HOST
+            value: football.api.sandbox.sportal365.com
+          - name: ASSET_DIR
+            value: /var/www/html/public/assets
+          - name: ASSET_BASE_URL
+            value: https://football.api.sandbox.sportal365.com/assets
+          - name: EVENT_IMPORT_INTERVAL
+            value: "60"
+          - name: EVENT_IMPORT_JOBS
+            value: "6"
+          - name: API_KEY_WRITE
+            value: 80254f2091712b99703e20745a293e64:5ca610102923d67aefb51938c9fec27d
+          - name: REDIS_CONNECTION_STRING
+            value: tcp://redis-footballapi-master
+          - name: PREDIS_ENABLED
+            value: "false"
+          - name: SPORTAL_EVENT_URL
+            value: http://localhost:8080/receive.php
+          - name: SPORTAL_LIVEODD_URL
+            value: http://localhost:8080/receive.php
+          - name: SPORTAL_ODD_CLIENT
+            value: sportal
+          - name: SPORTAL_DB_ENABLED
+            value: "false"
+          - name: SPORTAL_DB_HOST
+            value: 127.0.0.1
+          - name: SPORTAL_DB_USERNAME
+            value: root
+          - name: SPORTAL_DB_PASSWORD
+            value: varna
+          - name: SPORTAL_DB_NAME
+            value: sportalbg
+          - name: DB_CONNECTION
+            value: pgsql
+          - name: DB_HOST
+            value: 127.0.0.1
+          - name: DB_PORT
+            value: "5432"
+          - name: DB_DATABASE
+            value: football_api_sandbox
+          - name: DB_USERNAME
+            value: proxyuser
+          - name: DB_PASSWORD
+            value: KKkt4yAzWaD7QH8
+          - name: RUN_JOBS
+            value: "true"
+          - name: GOOGLE_CLOUD_PROJECT_ID
+            value: mythic-producer-212107
+          - name: GOOGLE_CLOUD_STORAGE_BUCKET
+            value: smp-football-api-standing-configuration
+          - name: GOOGLE_CLOUD_STORAGE_FILE_NAME
+            value: league-standing-sandbox.json
+          - name: GOOGLE_CLOUD_KEY_FILE
+            value: gcloud_credentials.json
+         
+
+        livenessProbe:
+          tcpSocket:
+            port: 9000
+          initialDelaySeconds: 10
+          timeoutSeconds: 3
+          periodSeconds: 20
+
+
+      - name: football-api-web
+        image: eu.gcr.io/mythic-producer-212107/football-api-web:$DOCKER_TAG_NAME
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 80
+        env:
+          - name: PHP_CONTAINER_NAME 
+            value: 127.0.0.1
+          - name: IMAGE_API_HOST
+            value: https://image.api.sportal365.com/process/smp-sandbox-images/assets
+
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "200m"
+            memory: "256Mi"
+        
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 80
+            httpHeaders:
+            - name: authorization
+              value: "Basic MWQ1NmRkMDY3ZGE1MDZmZDIwYTJjMDcwNjc2NWI1Zjg6YTNlOGUzYzBiZjQ3YTNjZjhkNDhmMGRkZGM1NmNmY2Q="
+          initialDelaySeconds: 10
+          timeoutSeconds: 3
+          periodSeconds: 10
+      
+
+    

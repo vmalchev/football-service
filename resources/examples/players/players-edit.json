@@ -1,0 +1,10 @@
+{
+  "name": "Player 14",
+  "country_id": "14",
+  "active": true,
+  "birth_city_id": "1",
+  "profile": {
+    "height": "192",
+    "weight": "88"
+  }
+}

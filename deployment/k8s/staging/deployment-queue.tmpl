@@ -1,0 +1,222 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: football-api-staging-queue
+  namespace: staging
+  labels:
+    env: staging
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: football-api-staging-queue
+      env: staging
+  template:
+    metadata:
+      labels:
+        app: football-api-staging-queue
+        env: staging
+    spec:
+      initContainers:
+      - name: php-init
+        image: eu.gcr.io/mythic-producer-212107/football-api-php:$DOCKER_TAG_NAME
+        imagePullPolicy: Always
+        command: ['bash', 'deployment/run.sh']
+        env:
+          - name: APP_ENV
+            value: production
+          - name: APP_DEBUG
+            value: "false"
+          - name: APP_KEY
+            value: 7ec39addd4e218a9f9209a017f125d8e
+          - name: APP_TIMEZONE
+            value: UTC
+          - name: ENETPULSE_DB_CONNECTION
+            value: mysql
+          - name: ENETPULSE_DB_HOST
+            value: mysql-enetpulse.integration
+          - name: ENETPULSE_DB_DATABASE
+            value: enetpulse
+          - name: ENETPULSE_DB_USERNAME
+            value: root
+          - name: ENETPULSE_DB_PASSWORD
+            value: r00tme
+          - name: CACHE_DRIVER
+            value: database
+          - name: QUEUE_DRIVER
+            value: database
+          - name: QUEUE_DRIVER
+            value: database
+          - name: API_HOST
+            value: football.staging.api.sportal365.com
+          - name: ASSET_DIR
+            value: /var/www/html/public/assets
+          - name: ASSET_BASE_URL
+            value: https://football.api.staging.sportal365.com/assets
+          - name: EVENT_IMPORT_INTERVAL
+            value: "120"
+          - name: EVENT_IMPORT_JOBS
+            value: "2"
+          - name: API_KEY_WRITE
+            value: b3b7e6f5cd87d9483cf6d0c6b5d9f4c5:70dd46175ec06bef7cd6ed50a2b7863b
+          - name: REDIS_CONNECTION_STRING
+            value: tcp://redis-footballapi-master
+          - name: PREDIS_ENABLED
+            value: "false"
+          - name: SPORTAL_EVENT_URL
+            value: http://localhost:8080/receive.php
+          - name: SPORTAL_LIVEODD_URL
+            value: http://localhost:8080/receive.php
+          - name: SPORTAL_ODD_CLIENT
+            value: sportal
+          - name: SPORTAL_DB_ENABLED
+            value: "false"
+          - name: SPORTAL_DB_HOST
+            value: 127.0.0.1
+          - name: SPORTAL_DB_USERNAME
+            value: root
+          - name: SPORTAL_DB_PASSWORD
+            value: varna
+          - name: SPORTAL_DB_NAME
+            value: sportalbg
+          - name: DB_CONNECTION
+            value: pgsql
+          - name: DB_HOST
+            value: postgres-footballapi-postgresql
+          - name: DB_PORT
+            value: "5432"
+          - name: DB_DATABASE
+            value: football_api
+          - name: DB_USERNAME
+            value: postgres
+          - name: DB_PASSWORD
+            value: postgres
+          - name: RUN_JOBS
+            value: "false"
+          - name: GOAOP_DEBUG_MODE
+            value: "false"
+
+
+      containers:
+      - name: web
+        image: eu.gcr.io/mythic-producer-212107/football-api-web:$DOCKER_TAG_NAME
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 80
+        env:
+          - name: PHP_CONTAINER_NAME
+            value: localhost
+          - name: IMAGE_API_HOST
+            value: https://image.api.sportal365.com/process/smp-images-production/assets
+
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "200m"
+            memory: "256Mi"
+      
+      - name: php
+        image: eu.gcr.io/mythic-producer-212107/football-api-php:$DOCKER_TAG_NAME
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "1024Mi"
+          limits:
+            cpu: "1000m"
+            memory: "4096Mi"
+        ports:
+          - containerPort: 9000
+          
+
+        env:
+          - name: APP_ENV
+            value: production
+          - name: APP_DEBUG
+            value: "false"
+          - name: APP_KEY
+            value: 7ec39addd4e218a9f9209a017f125d8e
+          - name: APP_TIMEZONE
+            value: UTC
+          - name: ENETPULSE_DB_CONNECTION
+            value: mysql
+          - name: ENETPULSE_DB_HOST
+            value: mysql-enetpulse.integration
+          - name: ENETPULSE_DB_DATABASE
+            value: enetpulse
+          - name: ENETPULSE_DB_USERNAME
+            value: root
+          - name: ENETPULSE_DB_PASSWORD
+            value: r00tme
+          - name: CACHE_DRIVER
+            value: database
+          - name: QUEUE_DRIVER
+            value: database
+          - name: QUEUE_DRIVER
+            value: database
+          - name: API_HOST
+            value: football.staging.api.sportal365.com
+          - name: ASSET_DIR
+            value: /var/www/html/public/assets
+          - name: ASSET_BASE_URL
+            value: https://football.api.staging.sportal365.com/assets
+          - name: EVENT_IMPORT_INTERVAL
+            value: "120"
+          - name: EVENT_IMPORT_JOBS
+            value: "2"
+          - name: API_KEY_WRITE
+            value: b3b7e6f5cd87d9483cf6d0c6b5d9f4c5:70dd46175ec06bef7cd6ed50a2b7863b
+          - name: REDIS_CONNECTION_STRING
+            value: tcp://redis-footballapi-master
+          - name: PREDIS_ENABLED
+            value: "false"
+          - name: SPORTAL_EVENT_URL
+            value: http://localhost:8080/receive.php
+          - name: SPORTAL_LIVEODD_URL
+            value: http://localhost:8080/receive.php
+          - name: SPORTAL_ODD_CLIENT
+            value: sportal
+          - name: SPORTAL_DB_ENABLED
+            value: "false"
+          - name: SPORTAL_DB_HOST
+            value: 127.0.0.1
+          - name: SPORTAL_DB_USERNAME
+            value: root
+          - name: SPORTAL_DB_PASSWORD
+            value: varna
+          - name: SPORTAL_DB_NAME
+            value: sportalbg
+          - name: DB_CONNECTION
+            value: pgsql
+          - name: DB_HOST
+            value: postgres-footballapi-postgresql
+          - name: DB_PORT
+            value: "5432"
+          - name: DB_DATABASE
+            value: football_api
+          - name: DB_USERNAME
+            value: postgres
+          - name: DB_PASSWORD
+            value: postgres
+          - name: RUN_JOBS
+            value: "true"
+          - name: GOOGLE_CLOUD_PROJECT_ID
+            value: mythic-producer-212107
+          - name: GOOGLE_CLOUD_STORAGE_BUCKET
+            value: smp-football-api-standing-configuration
+          - name: GOOGLE_CLOUD_STORAGE_FILE_NAME
+            value: league-standing-staging.json
+          - name: GOOGLE_CLOUD_KEY_FILE
+            value: gcloud_credentials.json
+         
+
+        livenessProbe:
+          tcpSocket:
+            port: 9000
+          initialDelaySeconds: 10
+          timeoutSeconds: 3
+          periodSeconds: 20
+
+    

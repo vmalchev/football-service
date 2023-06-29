@@ -1,0 +1,5 @@
+FROM rabbitmq:3.6.14-management-alpine
+ADD rabbit_definitions.json /etc/rabbitmq
+ADD rabbitmq.config /etc/rabbitmq
+
+EXPOSE 5672 15672

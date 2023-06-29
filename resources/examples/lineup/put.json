@@ -1,0 +1,169 @@
+{
+  "status": "CONFIRMED",
+  "home_team": {
+    "formation": "4-4-2",
+    "coach_id": "240",
+    "players": [
+      {
+        "type_id": "6",
+        "player_id": "1769",
+        "position_x": 10,
+        "position_y": 3,
+        "shirt_number": 10
+      },
+      {
+        "type_id": "5",
+        "player_id": "1735",
+        "position_x": 7,
+        "position_y": 4,
+        "shirt_number": 16
+      },
+      {
+        "type_id": "5",
+        "player_id": "1721",
+        "position_x": 7,
+        "position_y": 2,
+        "shirt_number": 30
+      },
+      {
+        "type_id": "6",
+        "player_id": "2144",
+        "position_x": 10,
+        "position_y": 5,
+        "shirt_number": 11
+      },
+      {
+        "type_id": "3",
+        "player_id": "1555",
+        "position_x": 1,
+        "position_y": 5,
+        "shirt_number": 13
+      },
+      {
+        "type_id": "5",
+        "player_id": "2125",
+        "position_x": 7,
+        "position_y": 6,
+        "shirt_number": 14
+      },
+      {
+        "type_id": "6",
+        "player_id": "1716",
+        "position_x": 10,
+        "position_y": 7,
+        "shirt_number": 27
+      },
+      {
+        "type_id": "4",
+        "player_id": "1798",
+        "position_x": 3,
+        "position_y": 5,
+        "shirt_number": 8
+      },
+      {
+        "type_id": "4",
+        "player_id": "2034",
+        "position_x": 3,
+        "position_y": 7,
+        "shirt_number": 21
+      },
+      {
+        "type_id": "4",
+        "player_id": "2050",
+        "position_x": 3,
+        "position_y": 3,
+        "shirt_number": 2
+      },
+      {
+        "type_id": "5",
+        "player_id": "9240",
+        "position_x": 7,
+        "position_y": 8,
+        "shirt_number": 31
+      }
+    ]
+  },
+  "away_team": {
+    "formation": "4-3-3",
+    "coach_id": "129",
+    "players": [
+      {
+        "type_id": "6",
+        "player_id": "2177",
+        "position_x": 10,
+        "position_y": 3,
+        "shirt_number": 10
+      },
+      {
+        "type_id": "5",
+        "player_id": "2176",
+        "position_x": 7,
+        "position_y": 4,
+        "shirt_number": 16
+      },
+      {
+        "type_id": "5",
+        "player_id": "1644",
+        "position_x": 7,
+        "position_y": 2,
+        "shirt_number": 30
+      },
+      {
+        "type_id": "6",
+        "player_id": "1951",
+        "position_x": 10,
+        "position_y": 5,
+        "shirt_number": 11
+      },
+      {
+        "type_id": "3",
+        "player_id": "1616",
+        "position_x": 1,
+        "position_y": 5,
+        "shirt_number": 13
+      },
+      {
+        "type_id": "5",
+        "player_id": "1852",
+        "position_x": 7,
+        "position_y": 6,
+        "shirt_number": 14
+      },
+      {
+        "type_id": "6",
+        "player_id": "1881",
+        "position_x": 10,
+        "position_y": 7,
+        "shirt_number": 27
+      },
+      {
+        "type_id": "4",
+        "player_id": "1860",
+        "position_x": 3,
+        "position_y": 5,
+        "shirt_number": 8
+      },
+      {
+        "type_id": "4",
+        "player_id": "2183",
+        "position_x": 3,
+        "position_y": 7,
+        "shirt_number": 21
+      },
+      {
+        "type_id": "4",
+        "player_id": "2101",
+        "position_x": 3,
+        "position_y": 3,
+        "shirt_number": 2
+      },
+      {
+        "type_id": "5",
+        "player_id": "1957",
+        "position_x": 7,
+        "position_y": 8,
+        "shirt_number": 31
+      }
+    ]
+  }
+}

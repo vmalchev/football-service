@@ -1,0 +1,52 @@
+[
+  {
+    "entity": "LINEUP_PLAYER_TYPE",
+    "entity_id": "276",
+    "language": "bg"
+  },
+  {
+    "entity": "VENUE",
+    "entity_id": "276",
+    "language": "bg"
+  },
+  {
+    "entity": "TOURNAMENT",
+    "entity_id": "276",
+    "language": "bg"
+  },
+  {
+    "entity": "TEAM",
+    "entity_id": "276",
+    "language": "bg"
+  },
+  {
+    "entity": "COACH",
+    "entity_id": "276",
+    "language": "bg"
+  },
+  {
+    "entity": "COUNTRY",
+    "entity_id": "276",
+    "language": "bg"
+  },
+  {
+    "entity": "MATCH_STATUS",
+    "entity_id": "276",
+    "language": "bg"
+  },
+  {
+    "entity": "STAGE",
+    "entity_id": "276",
+    "language": "en"
+  },
+  {
+    "entity": "PLAYER",
+    "entity_id": "276",
+    "language": "bg"
+  },
+  {
+    "entity": "REFEREE",
+    "entity_id": "276",
+    "language": "bg"
+  }
+]

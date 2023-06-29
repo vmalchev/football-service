@@ -1,0 +1,12 @@
+{
+  "players": [
+    {
+      "player_id": "3400",
+      "status": "ACTIVE",
+      "shirt_number": 1,
+      "end_date": "2013-10-10",
+      "start_date": "2012-10-10",
+      "contract_type": "PERMANENT"
+    }
+  ]
+}

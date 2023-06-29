@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: football-api-sandbox-ingress
+  namespace: sandbox
+  annotations:
+    kubernetes.io/tls-acme: "true" # enable certificates
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/client-body-buffer-size: 20M
+    nginx.ingress.kubernetes.io/proxy-body-size: 20M
+spec:
+  tls: # specify domains to fetch certificates for
+  - hosts:
+    - football.api.sandbox.sportal365.com
+    secretName: football-api-sandbox-tls
+  rules:
+  - host: football.api.sandbox.sportal365.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: football-api-sandbox-svc
+          servicePort: 80

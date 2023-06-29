@@ -1,0 +1,19 @@
+{
+  "events": [
+    {
+      "type_code": "GOAL",
+      "team_position": "HOME",
+      "minute": 1,
+      "primary_player_id": "3400",
+      "secondary_player_id": "3401",
+      "sort_order": 2
+    },
+    {
+      "type_code": "GOAL",
+      "team_position": "AWAY",
+      "minute": 1,
+      "primary_player_id": "3501",
+      "sort_order": 3
+    }
+  ]
+}

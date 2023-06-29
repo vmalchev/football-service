@@ -1,0 +1,81 @@
+{
+  "config": {
+    "secure-http": false
+  },
+  "repositories": [
+    {
+      "type": "git-bitbucket",
+      "url": "https://bitbucket.org/sportal-media-platform/football-feed-common.git"
+    },
+    {
+      "type": "git-bitbucket",
+      "url": "https://bitbucket.org/sportal-media-platform/enetpulse-football-feed.git"
+    },
+    {
+      "type": "git-bitbucket",
+      "url": "https://bitbucket.org/sportal-media-platform/goalserve-football-feed.git"
+    },
+    {
+      "type": "git-bitbucket",
+      "url": "https://bitbucket.org/sportal-media-platform/smpcachecontrol.git"
+    }
+  ],
+  "name": "sportal/football-api",
+  "description": "API for football related data.",
+  "keywords": [
+    "football",
+    "api"
+  ],
+  "license": "proprietary",
+  "type": "project",
+  "require": {
+    "php": "^7.4",
+    "laravel/lumen-framework": "^6.0",
+    "sportal/football-feed-common": "dev-master",
+    "sportal/enetpulse-football-parser": "dev-master",
+    "sportal/goalserve-football-feed": "dev-master",
+    "doctrine/dbal": "2.10.*",
+    "zircote/swagger-php": "^2.0",
+    "fruitcake/laravel-cors": "2.0.5",
+    "guzzlehttp/guzzle": "~6.0",
+    "smp/cache-control": "^1.2.0",
+    "myclabs/php-enum": "^1.7",
+    "psr/log": "^1.0",
+    "predis/predis": "~1.0",
+    "ramsey/uuid": "^4.0",
+    "symfony/serializer": "^5.0",
+    "symfony/property-access": "^5.0",
+    "symfony/validator": "^5.0",
+    "ext-json": "*",
+    "ext-gd": "*",
+    "symfony/intl": "^5.1",
+    "goaop/framework": "^2.3",
+    "alexsabdev/odds": "^1.0",
+    "phpdocumentor/reflection-docblock": "^5.2",
+    "macpaw/monolog-gke-formatter": "^0.1.7",
+    "bschmitt/laravel-amqp": "2.*",
+    "triadev/laravel-prometheus-exporter": "^1.8",
+    "google/cloud-storage": "^1.0"
+  },
+  "require-dev": {
+    "fzaninotto/faker": "~1.4",
+    "phpunit/phpunit": "^8.0",
+    "mockery/mockery": "^1.0"
+  },
+  "scripts": {
+    "generateSwagger": "./vendor/bin/swagger -e vendor/zircote/swagger-php/ -o ./public/swagger.json --bootstrap app/constants.php"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/",
+      "Sportal\\FootballApi\\": "football-service/src",
+      "Sportal\\StandingCalculator\\": "standing-calculator/src"
+    }
+  },
+  "autoload-dev": {
+    "classmap": [
+      "tests/",
+      "database/"
+    ]
+  }
+}
